@@ -13,7 +13,7 @@ import WithView from "ember-views/views/with_view";
 
   ```handlebars
   // posts might not be
-  {{#with user.posts as blogPosts}}
+  {{#with user.posts as |blogPosts|}}
     <div class="notice">
       There are {{blogPosts.length}} blog posts written by {{user.name}}.
     </div>
@@ -27,8 +27,8 @@ import WithView from "ember-views/views/with_view";
   Without the `as` operator, it would be impossible to reference `user.name` in the example above.
 
   NOTE: The alias should not reuse a name from the bound property path.
-  For example: `{{#with foo.bar as foo}}` is not supported because it attempts to alias using
-  the first part of the property path, `foo`. Instead, use `{{#with foo.bar as baz}}`.
+  For example: `{{#with foo.bar as |foo|}}` is not supported because it attempts to alias using
+  the first part of the property path, `foo`. Instead, use `{{#with foo.bar as |baz|}}`.
 
   ### `controller` option
 
@@ -38,7 +38,7 @@ import WithView from "ember-views/views/with_view";
   This is very similar to using an `itemController` option with the `{{each}}` helper.
 
   ```handlebars
-  {{#with users.posts as posts controller='userBlogPosts'}}
+  {{#with users.posts controller='userBlogPosts' as |posts|}}
     {{!- `posts` is wrapped in our controller instance }}
   {{/with}}
   ```
@@ -56,7 +56,7 @@ import WithView from "ember-views/views/with_view";
 export function withHelper(params, hash, options, env) {
   Ember.assert(
     "{{#with foo}} must be called with a single argument or the use the " +
-    "{{#with foo as bar}} syntax",
+    "{{#with foo as |bar|}} syntax",
     params.length === 1
   );
 
@@ -73,7 +73,7 @@ export function withHelper(params, hash, options, env) {
   } else {
     Ember.deprecate(
       "Using the context switching form of `{{with}}` is deprecated. " +
-      "Please use the keyword form (`{{with foo as bar}}`) instead.",
+      "Please use the block params form (`{{#with foo as |bar|}}`) instead.",
       false,
       { url: 'http://emberjs.com/guides/deprecations/#toc_more-consistent-handlebars-scope' }
     );

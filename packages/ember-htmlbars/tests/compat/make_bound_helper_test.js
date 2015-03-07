@@ -54,7 +54,7 @@ QUnit.module("ember-htmlbars: makeBoundHelper", {
 
 QUnit.test("primitives should work correctly [DEPRECATED]", function() {
   expectDeprecation('Using the context switching form of {{each}} is deprecated. Please use the keyword form (`{{#each foo in bar}}`) instead.');
-  expectDeprecation('Using the context switching form of `{{with}}` is deprecated. Please use the keyword form (`{{with foo as bar}}`) instead.');
+  expectDeprecation('Using the context switching form of `{{with}}` is deprecated. Please use the block params form (`{{#with foo as |bar|}}`) instead.');
 
   view = EmberView.create({
     prims: Ember.A(["string", 12]),

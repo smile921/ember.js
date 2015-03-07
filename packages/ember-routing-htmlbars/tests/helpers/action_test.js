@@ -200,14 +200,14 @@ QUnit.test("should target the with-controller inside an {{#with controller='pers
 
   expectDeprecation(function() {
     runAppend(view);
-  }, 'Using the context switching form of `{{with}}` is deprecated. Please use the keyword form (`{{with foo as bar}}`) instead.');
+  }, 'Using the context switching form of `{{with}}` is deprecated. Please use the block params form (`{{#with foo as |bar|}}`) instead.');
 
   ok(registeredTarget instanceof PersonController, "the with-controller is the target of action");
 });
 
 QUnit.test("should target the with-controller inside an {{each}} in a {{#with controller='person'}} [DEPRECATED]", function() {
   expectDeprecation('Using the context switching form of {{each}} is deprecated. Please use the keyword form (`{{#each foo in bar}}`) instead.');
-  expectDeprecation('Using the context switching form of `{{with}}` is deprecated. Please use the keyword form (`{{with foo as bar}}`) instead.');
+  expectDeprecation('Using the context switching form of `{{with}}` is deprecated. Please use the block params form (`{{#with foo as |bar|}}`) instead.');
 
   var eventsCalled = [];
 
@@ -473,7 +473,7 @@ QUnit.test("should work properly in an #each block", function() {
   ok(eventHandlerWasCalled, "The event handler was called");
 });
 
-QUnit.test("should work properly in a {{#with foo as bar}} block", function() {
+QUnit.test("should work properly in a {{#with foo as |bar|}} block", function() {
   var eventHandlerWasCalled = false;
 
   var controller = EmberController.extend({
@@ -483,7 +483,7 @@ QUnit.test("should work properly in a {{#with foo as bar}} block", function() {
   view = EmberView.create({
     controller: controller,
     something: { ohai: 'there' },
-    template: compile('{{#with view.something as somethingElse}}<a href="#" {{action "edit"}}>click me</a>{{/with}}')
+    template: compile('{{#with view.something as |somethingElse|}}<a href="#" {{action "edit"}}>click me</a>{{/with}}')
   });
 
   runAppend(view);
@@ -508,7 +508,7 @@ QUnit.test("should work properly in a #with block [DEPRECATED]", function() {
 
   expectDeprecation(function() {
     runAppend(view);
-  }, 'Using the context switching form of `{{with}}` is deprecated. Please use the keyword form (`{{with foo as bar}}`) instead.');
+  }, 'Using the context switching form of `{{with}}` is deprecated. Please use the block params form (`{{#with foo as |bar|}}`) instead.');
 
   view.$('a').trigger('click');
 
