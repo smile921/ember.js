@@ -25,14 +25,17 @@ export var CoreOutletView = View.extend({
     }
 
     if (this.lastResult) {
-      // Dirty any render nodes that correspond to outlets
-      for (var i = 0; i < this._outlets.length; i++) {
-        this._outlets[i].isDirty = true;
-      }
-
+      this.dirtyOutlets();
       this._outlets = [];
 
       this.scheduleRevalidate();
+    }
+  },
+
+  dirtyOutlets: function() {
+    // Dirty any render nodes that correspond to outlets
+    for (var i = 0; i < this._outlets.length; i++) {
+      this._outlets[i].isDirty = true;
     }
   }
 });
