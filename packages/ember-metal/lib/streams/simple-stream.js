@@ -3,9 +3,10 @@ import Stream from "ember-metal/streams/stream";
 import create from "ember-metal/platform/create";
 import { read, isStream } from "ember-metal/streams/utils";
 
-function SimpleStream(source) {
+function SimpleStream(source, label) {
   this.init();
   this.source = source;
+  this.label = label;
   this.dependency = this.addDependency(this.source);
 }
 
