@@ -130,7 +130,7 @@ QUnit.test("should be able to bind to globals with {{bind-attr}}", function() {
 
   expectDeprecation(function() {
     runAppend(view);
-  }, /Global lookup of TemplateTests.value from a Handlebars template is deprecated/);
+  }, /Global lookup of TemplateTests from a Handlebars template is deprecated/);
 
   equal(view.$('img').attr('alt'), "Test", "renders initial value");
 });
@@ -414,7 +414,7 @@ QUnit.test("should be able to bind classes to globals with {{bind-attr class}}",
 
   expectDeprecation(function() {
     runAppend(view);
-  }, /Global lookup of TemplateTests.isOpen from a Handlebars template is deprecated/);
+  }, /Global lookup of TemplateTests from a Handlebars template is deprecated/);
 
   ok(view.$('img').hasClass('is-open'), "sets classname to the dasherized value of the global property");
 });

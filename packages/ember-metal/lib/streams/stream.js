@@ -365,16 +365,6 @@ Stream.prototype = {
       this.dependencies = null;
       return true;
     }
-  },
-
-  isGlobal: function() {
-    var stream = this;
-    while (stream !== undefined) {
-      if (stream._isRoot) {
-        return stream._isGlobal;
-      }
-      stream = stream.source;
-    }
   }
 };
 
